@@ -1,24 +1,39 @@
-import type { Metadata } from "next"
-import "./globals.css"
-import Script from "next/script"
+import type { Metadata } from "next";
+import "./globals.css";
+import Script from "next/script";
+import { PrimeReactProvider } from "primereact/api";
+import Header from "./components/Header";
+import Searchbar from "./components/Searchbar";
+import HeaderMenu from "./components/HeaderMenu";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Access-Ouaf",
   description: "A school project",
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <Script
         src="https://kit.fontawesome.com/123bd410f9.js"
         crossOrigin="anonymous"
       />
-      <body>{children}</body>
+      <body>
+        <PrimeReactProvider>
+          <div className="main--container">
+            <Header />
+            <Searchbar />
+            <HeaderMenu />
+            <div className="main--content">{children}</div>
+            <Footer />
+          </div>
+        </PrimeReactProvider>
+      </body>
     </html>
-  )
+  );
 }
