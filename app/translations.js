@@ -53,7 +53,7 @@ export const translations = {
     email: "E-mail",
     password: "Mot de passe",
     register: "Pas encore de compte ? Inscrivez-vous !",
-    placeholder: "exemple@mail.fr"
+    placeholder: "exemple@mail.fr",
   },
   register: {
     displayName: "Nom / Prénom",
@@ -72,5 +72,11 @@ export const translations = {
     successSummary: "Succès",
     errorSummary: "Erreur",
     login: "Déjà un compte ? Connectez-vous !",
+  },
+  titles: {
+    categorie: "Catégorie",
+  },
+  text: {
+    results: "résultats",
   },
 }
