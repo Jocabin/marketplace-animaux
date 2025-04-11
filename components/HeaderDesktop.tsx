@@ -13,7 +13,7 @@ import { User } from "@supabase/supabase-js"
 import { useRouter } from "next/navigation"
 import Searchbar from "./Searchbar"
 
-export default function Header() {
+export default function HeaderDesktop() {
   const router = useRouter()
   const supabase = createClient()
 
@@ -69,7 +69,6 @@ export default function Header() {
   return (
     <>
       <header>
-        {/* <i className="header--burger-icon fa-solid fa-burger"></i> */}
         <Logo />
         <Searchbar />
         <div className="header--icons">
