@@ -1,56 +1,57 @@
-"use client";
+"use client"
 
-import React, { useState, useRef, useEffect } from "react";
-import Logo from "./Logo";
-import RegisterForm from "./RegisterForm";
-import LoginForm from "./LoginForm";
-import { translations } from "../lib/translations";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-import { TieredMenu } from "primereact/tieredmenu";
-import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { useRouter } from "next/navigation";
+import React, { useState, useRef, useEffect } from "react"
+import Logo from "./Logo"
+import RegisterForm from "./RegisterForm"
+import LoginForm from "./LoginForm"
+import { translations } from "../lib/translations"
+import { Button } from "primereact/button"
+import { Dialog } from "primereact/dialog"
+import { TieredMenu } from "primereact/tieredmenu"
+import { createClient } from "@/utils/supabase/client"
+import { User } from "@supabase/supabase-js"
+import { useRouter } from "next/navigation"
+import Searchbar from "./Searchbar"
 
 export default function Header() {
-  const router = useRouter();
-  const supabase = createClient();
+  const router = useRouter()
+  const supabase = createClient()
 
-  const [visible, setVisible] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
-  const menu = useRef<TieredMenu>(null);
-  const [user, set_user] = useState<User | null>(null);
+  const [visible, setVisible] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
+  const menu = useRef<TieredMenu>(null)
+  const [user, set_user] = useState<User | null>(null)
 
   useEffect(() => {
     async function fetchUser() {
       const {
         data: { user },
-      } = await supabase.auth.getUser();
-      set_user(user);
+      } = await supabase.auth.getUser()
+      set_user(user)
     }
-    fetchUser();
-  }, [supabase.auth]);
+    fetchUser()
+  }, [supabase.auth])
 
   const handleSuccessLogin = async () => {
-    setIsRegistered(true);
-    setVisible(false);
-    window.location.reload();
-  };
+    setIsRegistered(true)
+    setVisible(false)
+    window.location.reload()
+  }
 
   const handleSuccessRegister = () => {
-    setIsRegistered(true);
-  };
+    setIsRegistered(true)
+  }
 
   const handleToggleForm = () => {
-    setIsLogin(!isLogin);
-  };
+    setIsLogin(!isLogin)
+  }
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    console.log(error);
-    window.location.reload();
-  };
+    const { error } = await supabase.auth.signOut()
+    console.log(error)
+    window.location.reload()
+  }
 
   const items = [
     {
@@ -63,19 +64,20 @@ export default function Header() {
       icon: "pi pi-sign-out",
       command: handleLogout,
     },
-  ];
+  ]
 
   return (
     <>
       <header>
-        <i className="header--burger-icon fa-solid fa-burger"></i>
+        {/* <i className="header--burger-icon fa-solid fa-burger"></i> */}
         <Logo />
+        <Searchbar />
         <div className="header--icons">
           <Button
             icon="fa-regular fa-heart"
             text
             onClick={() => {
-              router.push("/wishlist");
+              router.push("/wishlist")
             }}
           />
           <Button icon="fa-regular fa-paper-plane" text onClick={() => null} />
@@ -109,8 +111,8 @@ export default function Header() {
                   label={translations.header.closeButton}
                   className="w-full mt-4"
                   onClick={() => {
-                    setVisible(false);
-                    setIsRegistered(false);
+                    setVisible(false)
+                    setIsRegistered(false)
                   }}
                 />
               </div>
@@ -135,5 +137,5 @@ export default function Header() {
         </div>
       </header>
     </>
-  );
+  )
 }
